@@ -8,8 +8,8 @@ const popupOpenbyMainButton = document.querySelector('.profile__button-edit');//
     //------------------------------------Всплывающее окно РЕДАКТИРОВАНИЕ ПРОФИЛЯ----------------------------------------------------------
 const popupOpenEditorForm = document.querySelector('.popup__profile-edit');//всплывающее окно - редактирование профиля
 const popupEditorForm = popupOpenEditorForm.querySelector('.popup__form');//всплывающее окно - форма редактирования профиля
-const inputNameEditor = popupEditorForm.querySelector('.popup_input_name');//всплывающее окно - ввод имени
-const inputJobEditor = popupEditorForm.querySelector('.popup_input_job');//всплывающее окно - ввод рода деятельности
+const inputNameEditor = popupEditorForm.querySelector('.popup__input_name');//всплывающее окно - ввод имени
+const inputJobEditor = popupEditorForm.querySelector('.popup__input_job');//всплывающее окно - ввод рода деятельности
 const closeButtonsEditor = document.querySelectorAll('.popup__button_close');//всплывающее окно - кнопка крестик
 
 function openPopup(popup) {
