@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/index.css">
+    <title>Mesto</title>
+</head>
+
+<body class="page">
+
+    <header class="header">
+        <img class="header__logo" src="./images/header__logo.svg" alt="Логотип">
+    </header>
+
+    <main class="content">
+        <section class="profile">
+            <img class="profile__avatar" src="./images/kusto.jpg" alt="Аватар профиля">
+            <div class="profile__info">
+                <div class="profile__container">
+                    <h1 class="profile__title">Жак-Ив Кусто</h1>
+                    <button class="profile__button-edit" type="button"></button>
+                </div>
+                <p class="profile__about">Исследователь океана</p>
+            </div>
+            <button class="profile__button-add" type="button"></button>
+        </section>
+
+        <section class="elements">
+            <div class="elements__card">
+                <img class="elements__image" src="./images/arkiz.jpg" alt="Архыз">
+                <div class="elements__description">
+                    <h2 class="elements__name">Архыз</h2>
+                    <button class="elements__button-heart" type="button"></button>
+                </div>
+            </div>
+            <div class="elements__card">
+                <img class="elements__image" src="./images/baikal.jpg" alt="Байкал">
+                <div class="elements__description">
+                    <h2 class="elements__name">Байкал</h2>
+                    <button class="elements__button-heart" type="button"></button>
+                </div>
+            </div>
+            <div class="elements__card">
+                <img class="elements__image" src="./images/chelyaba.jpg" alt="Челябинская область">
+                <div class="elements__description">
+                    <h2 class="elements__name">Челябинская область</h2>
+                    <button class="elements__button-heart" type="button"></button>
+                </div>
+            </div>
+            <div class="elements__card">
+                <img class="elements__image" src="./images/ivanovo.jpg" alt="Иваново">
+                <div class="elements__description">
+                    <h2 class="elements__name">Иваново</h2>
+                    <button class="elements__button-heart" type="button"></button>
+                </div>
+            </div>
+            <div class="elements__card">
+                <img class="elements__image" src="./images/kamchatka.jpg" alt="Камчатка">
+                <div class="elements__description">
+                    <h2 class="elements__name">Камчатка</h2>
+                    <button class="elements__button-heart" type="button"></button>
+                </div>
+            </div>
+            <div class="elements__card">
+                <img class="elements__image" src="./images/rail_road.jpg" alt="Холмогорский район">
+                <div class="elements__description">
+                    <h2 class="elements__name">Холмогорский район</h2>
+                    <button class="elements__button-heart" type="button"></button>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <p class="footer__copyright">© 2023 Mesto Russia</p>
+    </footer>
+
+    <!--Попап - редактирование профиля-->
+
+    <div class="popup popup__profile-edit">
+        <div class="popup__container">
+            <button class="popup__button_close" type="button"></button>
+            <form class="popup__form">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                    <input class="popup__input popup_input_name" name="name" type="text" placeholder="Имя" required>
+                    <input class="popup__input popup_input_job" name="job" type="text" placeholder="О себе" required>
+                <button class="popup__button_submit-edit" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div> 
+    
+    <script src="./scripts/index.js"></script>
+</body>
+</html>
