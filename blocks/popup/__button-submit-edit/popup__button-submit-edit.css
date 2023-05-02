@@ -1,4 +1,4 @@
-.popup__button_submit-edit {
+.popup__button-submit-edit {
     margin: 12px 0 0 0;
     border-radius: 2px;
     background-color: #000000;
@@ -12,6 +12,6 @@
     line-height: 21.78px;
 }
 
-.popup__button_submit-edit:hover {
+.popup__button-submit-edit:hover {
     opacity: 0.6;
 }
