@@ -6,7 +6,7 @@ const mainAbout = document.querySelector('.profile__about');//основная �
 const popupOpenbyMainButton = document.querySelector('.profile__button-edit');//основная страница - кнопка редактирования
 //--------------------------------------------------------Константы------------------------------------------------------------------------
     //------------------------------------Всплывающее окно РЕДАКТИРОВАНИЕ ПРОФИЛЯ----------------------------------------------------------
-const popupOpenEditorForm = document.querySelector('.popup__edit-profile');//всплывающее окно - редактирование профиля
+const popupOpenEditorForm = document.querySelector('.popup-edit-profile');//всплывающее окно - редактирование профиля
 const popupEditorForm = popupOpenEditorForm.querySelector('.popup__form');//всплывающее окно - форма редактирования профиля
 const inputNameEditor = popupEditorForm.querySelector('.popup__input_name');//всплывающее окно - ввод имени
 const inputJobEditor = popupEditorForm.querySelector('.popup__input_job');//всплывающее окно - ввод рода деятельности
