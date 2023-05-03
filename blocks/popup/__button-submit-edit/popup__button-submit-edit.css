@@ -3,7 +3,7 @@
     border-radius: 2px;
     background-color: #000000;
     border: 0;
-    height: 50px;
+    height: 46px;
     width: 100%;
     cursor: pointer;
     color: #FFFFFF;
@@ -13,5 +13,13 @@
 }
 
 .popup__button-submit-edit:hover {
-    opacity: 0.6;
+    opacity: 0.8;
+}
+
+@media screen and (max-width: 660px) {
+    .popup__button-submit-edit {
+        font-size: 14px;
+        line-height: 17px;
+        margin-top: 5px;
+    }    
 }

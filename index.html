@@ -78,13 +78,13 @@
 
     <!--Попап - редактирование профиля-->
 
-    <div class="popup popup-edit-profile">
+    <div class="popup">
         <div class="popup__container">
             <button class="popup__button-close" type="button"></button>
-            <form class="popup__form">
+            <form class="popup__form" name="form-profile" action="#" method="get">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                    <input class="popup__input popup__input_name" name="name" type="text" placeholder="Имя" required>
-                    <input class="popup__input popup__input_job" name="job" type="text" placeholder="О себе" required>
+                    <input class="popup__input popup__input_type_name" name="name" type="text" placeholder="Имя" required>
+                    <input class="popup__input popup__input_type_job" name="job" type="text" placeholder="О себе" required>
                 <button class="popup__button-submit-edit" type="submit">Сохранить</button>
             </form>
         </div>

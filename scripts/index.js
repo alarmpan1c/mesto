@@ -6,18 +6,18 @@ const mainAbout = document.querySelector('.profile__about');//основная �
 const popupOpenbyMainButton = document.querySelector('.profile__button-edit');//основная страница - кнопка редактирования
 //--------------------------------------------------------Константы------------------------------------------------------------------------
     //------------------------------------Всплывающее окно РЕДАКТИРОВАНИЕ ПРОФИЛЯ----------------------------------------------------------
-const popupOpenEditorForm = document.querySelector('.popup-edit-profile');//всплывающее окно - редактирование профиля
+const popupOpenEditorForm = document.querySelector('.popup');//всплывающее окно - редактирование профиля
 const popupEditorForm = popupOpenEditorForm.querySelector('.popup__form');//всплывающее окно - форма редактирования профиля
-const inputNameEditor = popupEditorForm.querySelector('.popup__input_name');//всплывающее окно - ввод имени
-const inputJobEditor = popupEditorForm.querySelector('.popup__input_job');//всплывающее окно - ввод рода деятельности
-const closeButtonsEditor = document.querySelectorAll('.popup__button-close');//всплывающее окно - кнопка крестик
+const inputNameEditor = popupEditorForm.querySelector('.popup__input_type_name');//всплывающее окно - ввод имени
+const inputJobEditor = popupEditorForm.querySelector('.popup__input_type_job');//всплывающее окно - ввод рода деятельности
+const closeButtonsEditor = document.querySelector('.popup__button-close');//всплывающее окно - кнопка крестик
 
 function openPopup(popup) {
-    popup.classList.add('popup__opened');//добавляет класс с видимостью
+    popup.classList.add('popup_opened');//добавляет класс с видимостью
 }
 
 function closePopup(popup) {
-    popup.classList.remove('popup__opened')//убирает класс с видимостью   
+    popup.classList.remove('popup_opened');//убирает класс с видимостью   
 }
 
 popupOpenbyMainButton.addEventListener('click', () => {
@@ -33,7 +33,6 @@ popupEditorForm.addEventListener('submit', (evt) => {
     closePopup(popupOpenEditorForm);//Вызов функции закрытия всплывающего окна
 })                                 
 //------------------------------Обработчик события - Нажатие мышкой на крестик----------------------------------
-closeButtonsEditor.forEach((button) => {
-  const popup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(popup));
-});
+closeButtonsEditor.addEventListener('click',() => {
+    closePopup(popupOpenEditorForm);
+})

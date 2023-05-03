@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     max-width: 336px;
+    justify-content: center;
 }
 
 @media screen and (max-width: 930px) {
@@ -11,6 +12,5 @@
         align-items: center;
         justify-content: center;
         margin-top: 23px;
-        flex-direction: column;
     }
 }
