@@ -7,11 +7,11 @@
     border: 1px solid #FFFFFF;
     box-sizing: border-box;
     margin: 15px 0 0 18px;
-    padding: 0 0 0 20px;
+    padding: 0 0 0 22px;
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
-    background-size: 24px 24px;
+    background-size: 10px 10px;
 }
 
 .profile__button-edit:hover {
@@ -20,9 +20,10 @@
 
 @media screen and (max-width: 930px) {
     .profile__button-edit {
-        height: 20px;
-        width: 20px;
+        height: 18px;
+        width: 18px;
         margin: 8px 0 0 10px;
-        background-size: 20px 20px;
+        background-size: 7.5px 7.5px;
+        padding-left: 16px;
     }    
 }
