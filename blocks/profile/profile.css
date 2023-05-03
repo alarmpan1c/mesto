@@ -7,7 +7,7 @@
 
 @media screen and (max-width: 930px) {
     .profile {
-        width: 70%;
+        max-width: 320px;
         flex-direction: column;
         padding-top: 42px;
         justify-content: center;
