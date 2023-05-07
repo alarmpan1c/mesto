@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./pages/index.css">
+    <script defer src="./scripts/constants.js"></script>
+    <script defer src="./scripts/index.js"></script>
     <title>Mesto</title>
 </head>
 
@@ -19,11 +21,11 @@
             <div class="profile__info">
                 <div class="profile__container">
                     <h1 class="profile__title">Жак-Ив Кусто</h1>
-                    <button class="profile__button-edit" type="button"></button>
+                    <button class="profile__button-edit" type="button" aria-label="Редактировать профиль"></button>
                 </div>
                 <p class="profile__about">Исследователь океана</p>
             </div>
-            <button class="profile__button-add" type="button"></button>
+            <button class="profile__button-add" type="button" aria-label="Добавить место"></button>
         </section>
 
         <section class="elements">
@@ -38,12 +40,12 @@
 
     <div class="popup popup-edit">
         <div class="popup__container">
-            <button class="popup__button-close" type="button"></button>
+            <button class="popup__button-close" type="button" aria-label="Закрыть"></button>
             <form class="popup__form" name="form-profile" action="#" method="get">
                 <h2 class="popup__title">Редактировать профиль</h2>
                     <input class="popup__input popup__input_type_name" name="name" type="text" placeholder="Имя" required>
                     <input class="popup__input popup__input_type_job" name="job" type="text" placeholder="О себе" required>
-                <button class="popup__button-submit" type="submit">Сохранить</button>
+                <button class="popup__button-submit" type="submit" aria-label="Сохранить">Сохранить</button>
             </form>
         </div>
     </div> 
@@ -52,12 +54,12 @@
 
     <div class="popup popyp-add-place">
         <div class="popup__container">
-            <button class="popup__button-close" type="button"></button>
+            <button class="popup__button-close" type="button" aria-label="Закрыть"></button>
             <form class="popup__form" name="form-add-place" action="#" method="get">
                 <h2 class="popup__title">Новое место</h2>
                     <input class="popup__input popup__input_type_place" name="place" type="text" placeholder="Название" required>
                     <input class="popup__input popup__input_type_link-place" name="link" type="url" placeholder="Ссылка на картинку" required>
-                <button class="popup__button-submit" type="submit">Создать</button>
+                <button class="popup__button-submit" type="submit" aria-label="Создать">Создать</button>
             </form>
         </div>
     </div> 
@@ -66,7 +68,7 @@
 
     <div class="popup popup-expand">
         <div class="popup__expand-image">
-            <button class="popup__button-close" type="button"></button>
+            <button class="popup__button-close" type="button" aria-label="Закрыть"></button>
             <figure class="picture">
                 <img class="picture__image" src="#" alt="#">
                 <figcaption class="picture__caption"></figcaption> 
@@ -81,11 +83,10 @@
             <img class="elements__image" src="#" alt="#">
             <div class="elements__description">
                 <h2 class="elements__name"></h2>
-                <button class="elements__button-heart" type="button" aria-label="Лайк"></button> <!-- добавить через JS elements__button-heart_black -->
+                <button class="elements__button-heart" type="button" aria-label="Лайк"></button>
             </div>
         </div>
     </template>
 
-    <script src="./scripts/index.js"></script>
 </body>
 </html>
