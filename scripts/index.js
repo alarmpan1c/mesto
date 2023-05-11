@@ -1,4 +1,3 @@
-//--------------------------------------------------------Константы------------------------------------------------------------------------
 //----------------------------------------------------------ОБЩИЕ--------------------------------------------------------------------------
 const popupCloseButtons = document.querySelectorAll('.popup__button-close');//всплывающее окно - кнопка крестик
 const popupAll = document.querySelectorAll('.popup');//всплывающие окна
@@ -28,6 +27,7 @@ const buttonAdd = popupAddForm.querySelector('.popup__button-submit');
 const popupExtendPicture = document.querySelector('.popup-expand');//всплывающее окно - ресайз картинки
 const expendImage = popupExtendPicture.querySelector('.picture__image');//ресайз картинки - изображение
 const expendCaption = popupExtendPicture.querySelector('.picture__caption');//ресайз картинки - подпись
+
 //-----------------------------------------Очистка примечания под полем ввода-------------------------------------------------------------
 function clearSpan(form) {
   form.querySelectorAll(validationConfig.inputSelector).forEach((input) => {
@@ -40,14 +40,12 @@ function clearSpan(form) {
   })
 }
 //-----------------------------------------Активация/деактивация кнопки Сохранить---------------------------------------------------------
-function activeButton(inputList, button, disableButtonClass) {
-  if (Array.from(inputList).some((input) => input.validity.valid)) {
-      button.classList.add(disableButtonClass);
-      button.disabled = true;
+function nonactiveButton(inputList, button, disableButtonClass) {
+  if (Array.from(inputList).some((input) => !input.validity.valid)) {
+      disableButton(button, disableButtonClass);
   }
   else {
-      button.classList.remove(disableButtonClass);
-      button.disabled = false;
+      enableButton(button, disableButtonClass);
   }
 }
 //-------------------------------------------------------Общие функции---------------------------------------------------------------------
@@ -59,27 +57,27 @@ function closePopup(popup) {
 }
 //---------------------------------------------Обработчик события - Нажатие мышкой на крестик-----------------------------------------------
 popupCloseButtons.forEach((element) => {//перебор кнопок
-  const parent = element.closest('.popup');//родитель
+  const parent = element.closest('.popup');
   element.addEventListener('click', () => {//по нажатию->закрытие
       closePopup(parent);
   })
 })
-//----------------------------------------------------------Главная форма------------------------------------------------------------------
 //---------------------------------------------------Всплывающее окно редактора------------------------------------------------------------
 popupEditOpenButton.addEventListener('click', () => {
-  clearSpan(popupEditorForm);
   inputNameEditor.value = mainTitle.textContent;//Установка/заполнение поля ВВОДА начальным значением - ИМЕНЕМ Персонажа с основной страницы
   inputJobEditor.value = mainAbout.textContent;//Установка/заполнение поля ВВОДА начальным значением - Родом деятельности Персонажа с основной страницы
-  activeButton(scheduleInputEditor, buttonEditor, validationConfig.disableButtonClass);
-  openPopup(popupEditor)
+    nonactiveButton(scheduleInputAdd, buttonEditor, validationConfig.disableButtonClass);
+    clearSpan(popupEditorForm);
+    openPopup(popupEditor);
 })
 //---------------------------------------------------Всплывающее окно добавления места-----------------------------------------------------
 popupAddOpenButton.addEventListener('click', () => {
+  popupAddNamePlace.value = '';
+  popupAddLinkPlace.value = '';
+  nonactiveButton(scheduleInputAdd, buttonAdd, validationConfig.disableButtonClass);
   clearSpan(popupAddForm);
-  activeButton(scheduleInputAdd, buttonAdd, validationConfig.disableButtonClass);
-   openPopup(popupAdd)
+  openPopup(popupAdd);
 })
-//----------------------------------------------------------ВСПЛЫВАЮЩИЕ ФОРМЫ---------------------------------------------------------------
 //-----------------------------------------------Всплывающая форма редактирования профиля---------------------------------------------------
 //_______________________________________________Нажатие кнопки Сохранить + Закрытие окна___________________________________________________
 popupEditorForm.addEventListener('submit', (evt) => {
@@ -132,9 +130,7 @@ function fillImageData(image, data) {
 function closePopupEsc(evt) {
   if (evt.key === 'Escape') closePopup(document.querySelector('.popup_opened'))
 }
-
 document.addEventListener('keydown', closePopupEsc);
-
 //---------------------------------------------Обработчик события - Нажатие на оверлей-----------------------------------------------
 popupAll.forEach((element) => {//перебор окон
   element.addEventListener('mousedown', (evt) => {//по нажатию кнопки мыши->закрытие

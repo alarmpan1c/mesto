@@ -12,30 +12,39 @@ function enableValidation(config) {
     allForms.forEach((form) => {//перебор всплывающих форм
         const scheduleOfInputElementonForm = form.querySelectorAll(config.inputSelector);//список полей ввода расположенных на всплывающей форме
         const buttonElementonForm = form.querySelector(config.submitButtonSelector);//кнопка расположенная на всплывающей форме
-        scheduleOfInputElementonForm.forEach((input) => {//перебор полей ввода на всплывающей форме
-            input.addEventListener('input', () => {//обработка события - ввод в поле ввода
-                const textAboutError = document.querySelector(`${config.errorSelectorTemplate}${input.name}`);//склейка, очень удобно для формирования имени модификатора
-                if (input.validity.valid === true) {
-                    //ошибки есть?
-                    input.classList.remove(config.inputErrorClass);//удалить модификатор
-                    textAboutError.textContent = '';//"обнуление" поля
-                    textAboutError.classList.remove(config.textErrorClass);//удалить модификатор 
-                }
-                else {//не выполнено -> сообщение об ошибке
-                    input.classList.add(config.inputErrorClass);//добавить модификатор
-                    textAboutError.textContent = input.validationMessage;//присвоение сообщения об ошибке
-                    textAboutError.classList.add(config.textErrorClass);//добавить модификатор 
-                }
-                if (Array.from(scheduleOfInputElementonForm).some((input) => !input.validity.valid)) {//можно every(обратная some) ошибки есть в полях ввода
-                    buttonElementonForm.classList.add(config.disableButtonClass);//добавить модификатор 
-                    buttonElementonForm.disabled = true;//выключить
-                }
-                else {//ошибок нет
-                    buttonElementonForm.classList.remove(config.disableButtonClass); //удалить модификатор 
-                    buttonElementonForm.disabled = false;//включить
-                }
-            })
-        })
+        scheduleOfInputElementonForm.forEach((input) => setEventListener(input, config, scheduleOfInputElementonForm, buttonElementonForm));
     })
 }
+function setEventListener(input, config, scheduleOfInputElementonForm, buttonElementonForm) {
+    input.addEventListener('input', () => {//обработка события - ввод в поле ввода
+        const textAboutError = document.querySelector(`${config.errorSelectorTemplate}${input.name}`);//склейка, очень удобно для формирования имени модификатора
+        if (input.validity.valid === true) hideInputError(input, config.inputErrorClass, textAboutError, config.textErrorClass);
+        else showInputError(input, config.inputErrorClass, textAboutError, config.textErrorClass);
+        toggleButtonState(scheduleOfInputElementonForm, buttonElementonForm, config.disableButtonClass);
+    })
+}
+function hideInputError(input, inputErrorClass, textAboutError, textErrorClass) {
+    input.classList.remove(inputErrorClass);//удалить модификатор
+    textAboutError.textContent = '';//"обнуление" поля
+    textAboutError.classList.remove(textErrorClass);//удалить модификатор 
+}
+function showInputError(input, inputErrorClass, textAboutError, textErrorClass) {
+    input.classList.add(inputErrorClass);//добавить модификатор
+    textAboutError.textContent = input.validationMessage;//присвоение сообщения об ошибке
+    textAboutError.classList.add(textErrorClass);//добавить модификатор 
+}
+//toggleButtonState(scheduleInputEditor, buttonEditor, validationConfig.disableButtonClass);
+function toggleButtonState(inputList, button, disableButtonClass) {
+    if (Array.from(inputList).some((input) => !input.validity.valid)) disableButton(button, disableButtonClass);
+    else enableButton(button, disableButtonClass);
+}
+function enableButton(button, disableButtonClass) {
+    button.classList.remove(disableButtonClass); //удалить модификатор 
+    button.disabled = false;//включить
+}
+function disableButton(button, disableButtonClass) {
+    button.classList.add(disableButtonClass);//добавить модификатор 
+    button.disabled = true;//выключить
+}
+
 enableValidation(validationConfig)
