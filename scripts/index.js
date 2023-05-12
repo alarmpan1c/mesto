@@ -34,7 +34,8 @@ function openPopup(popup) {
   document.addEventListener('keydown', closePopupEsc);
 }
 function closePopup(popup) {
-  popup.classList.remove('popup_opened');   
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEsc);
 }
 //-----------------------------------Обработчик события - Нажатие мышкой на крестик------------------
 popupCloseButtons.forEach((element) => {
