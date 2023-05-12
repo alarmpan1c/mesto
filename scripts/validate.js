@@ -1,50 +1,60 @@
 const validationConfig = {
-    formSelector: '.popup__form',//формы всплывающих окон
-    inputSelector: '.popup__input',//поля ввода всех попапов
-    submitButtonSelector: '.popup__button-submit',//кнопки 'сохранить' всех попапов
-    errorSelectorTemplate: '.popup__span-error_type_',//шаблон имени для поля ввода ошибки, интересный метод
-    disableButtonClass: 'popup__button-submit_invalid',//кнопка не активная из-за не выполнения условий
-    inputErrorClass: 'popup__input_invalid',//класс подчеркивания поля ввода
-    textErrorClass: 'popup__span-error_type'//класс текстовое сообщение об ошибке
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button-submit',
+    errorSelectorTemplate: '.popup__span-error_type_',
+    disableButtonClass: 'popup__button-submit_invalid',
+    inputErrorClass: 'popup__input_invalid',
+    textErrorClass: 'popup__span-error_type'
 };
 function enableValidation(config) {
-    const allForms = Array.from(document.querySelectorAll(config.formSelector));//все всплывающие формы
-    allForms.forEach((form) => {//перебор всплывающих форм
-        const scheduleOfInputElementonForm = form.querySelectorAll(config.inputSelector);//список полей ввода расположенных на всплывающей форме
-        const buttonElementonForm = form.querySelector(config.submitButtonSelector);//кнопка расположенная на всплывающей форме
+    const allForms = Array.from(document.querySelectorAll(config.formSelector));
+    allForms.forEach((form) => {
+        const scheduleOfInputElementonForm = form.querySelectorAll(config.inputSelector);
+        const buttonElementonForm = form.querySelector(config.submitButtonSelector);
         scheduleOfInputElementonForm.forEach((input) => setEventListener(input, config, scheduleOfInputElementonForm, buttonElementonForm));
     })
 }
 function setEventListener(input, config, scheduleOfInputElementonForm, buttonElementonForm) {
-    input.addEventListener('input', () => {//обработка события - ввод в поле ввода
-        const textAboutError = document.querySelector(`${config.errorSelectorTemplate}${input.name}`);//склейка, очень удобно для формирования имени модификатора
+    input.addEventListener('input', () => {
+        const textAboutError = document.querySelector(`${config.errorSelectorTemplate}${input.name}`);
         if (input.validity.valid === true) hideInputError(input, config.inputErrorClass, textAboutError, config.textErrorClass);
         else showInputError(input, config.inputErrorClass, textAboutError, config.textErrorClass);
         toggleButtonState(scheduleOfInputElementonForm, buttonElementonForm, config.disableButtonClass);
     })
 }
 function hideInputError(input, inputErrorClass, textAboutError, textErrorClass) {
-    input.classList.remove(inputErrorClass);//удалить модификатор
-    textAboutError.textContent = '';//"обнуление" поля
-    textAboutError.classList.remove(textErrorClass);//удалить модификатор 
+    input.classList.remove(inputErrorClass);
+    textAboutError.textContent = '';
+    textAboutError.classList.remove(textErrorClass);
 }
 function showInputError(input, inputErrorClass, textAboutError, textErrorClass) {
-    input.classList.add(inputErrorClass);//добавить модификатор
-    textAboutError.textContent = input.validationMessage;//присвоение сообщения об ошибке
-    textAboutError.classList.add(textErrorClass);//добавить модификатор 
+    input.classList.add(inputErrorClass);
+    textAboutError.textContent = input.validationMessage;
+    textAboutError.classList.add(textErrorClass);
 }
-//toggleButtonState(scheduleInputEditor, buttonEditor, validationConfig.disableButtonClass);
+
 function toggleButtonState(inputList, button, disableButtonClass) {
     if (Array.from(inputList).some((input) => !input.validity.valid)) disableButton(button, disableButtonClass);
     else enableButton(button, disableButtonClass);
 }
 function enableButton(button, disableButtonClass) {
-    button.classList.remove(disableButtonClass); //удалить модификатор 
-    button.disabled = false;//включить
+    button.classList.remove(disableButtonClass); 
+    button.disabled = false;
 }
 function disableButton(button, disableButtonClass) {
-    button.classList.add(disableButtonClass);//добавить модификатор 
-    button.disabled = true;//выключить
+    button.classList.add(disableButtonClass);
+    button.disabled = true;
+}
+function removeValidationErrors(form) {
+    form.querySelectorAll(validationConfig.inputSelector).forEach((input) => {
+        const textAboutError = document.querySelector(`${validationConfig.errorSelectorTemplate}${input.name}`);
+        if (!input.validity.valid) {
+            input.classList.remove(validationConfig.inputErrorClass);
+            textAboutError.textContent = '';
+            textAboutError.classList.remove(validationConfig.textErrorClass);
+        }
+    })
 }
 
 enableValidation(validationConfig)
