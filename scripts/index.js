@@ -1,3 +1,16 @@
+import initialCards from "./constants.js";//импортирует массив из файла
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+
+const validationConfig = {
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-submit',
+  errorSelectorTemplate: '.popup__span-error_type_',
+  disableButtonClass: 'popup__button-submit_invalid',
+  inputErrorClass: 'popup__input_invalid',
+  textErrorClass: 'popup__span-error_type'
+};
+
 //-----------------------------------ОБЩИЕ---------------------------------------------------------
 const popupCloseButtons = document.querySelectorAll('.popup__button-close');
 const popupAll = document.querySelectorAll('.popup');
@@ -11,23 +24,19 @@ const popupEditor = document.querySelector('.popup');
 const popupEditorForm = popupEditor.querySelector('.popup__form');
 const inputNameEditor = popupEditorForm.querySelector('.popup__input_type_name');
 const inputJobEditor = popupEditorForm.querySelector('.popup__input_type_job');
-const scheduleInputEditor = popupEditorForm.querySelectorAll('.popup__input');
-const buttonEditor = popupEditorForm.querySelector('.popup__button-submit');
 //-----------------------------------Работа с Шаблоном--------------------------------------------
 const elementsOutput = document.querySelector('.elements');
-const cardTemplate = document.querySelector('#template').content;
 //-----------------------------------Всплывающее окно ДОБАВЛЕНИЯ КАРТОЧКИ-----------------------------
 const popupAdd = document.querySelector('.popyp-add-place');
 const popupAddForm = popupAdd.querySelector('.popup__form');
 const popupAddNamePlace = popupAddForm.querySelector('.popup__input_type_place');
 const popupAddLinkPlace = popupAddForm.querySelector('.popup__input_type_link-place');
-const scheduleInputAdd = popupAddForm.querySelectorAll('.popup__input');
-const buttonAdd = popupAddForm.querySelector('.popup__button-submit');
 //-----------------------------------Всплывающее окно Ресайз картинки---------------------------------
 const popupExtendPicture = document.querySelector('.popup-expand');
 const expendImage = popupExtendPicture.querySelector('.picture__image');
 const expendCaption = popupExtendPicture.querySelector('.picture__caption');
 
+const mySelectorTemplate = '#template';
 //-----------------------------------Общие функции---------------------------------------------------
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -44,23 +53,21 @@ popupCloseButtons.forEach((element) => {
       closePopup(parent);
   })
 })
-//-----------------------------------Всплывающее окно редактора---------------------------------------
+//-----------------------------------Обработчик события нажатия иконки карандаша -> Всплывающее окно редактора------------------------------
 popupEditOpenButton.addEventListener('click', () => {
-  removeValidationErrors(popupEditorForm);
+  validationEditor.removeValidationErrors();
   inputNameEditor.value = mainTitle.textContent;
   inputJobEditor.value = mainAbout.textContent;
-  toggleButtonState(scheduleInputAdd, buttonEditor, validationConfig.disableButtonClass);
   openPopup(popupEditor);
 })
-//-----------------------------------Всплывающее окно добавления места-------------------------------
+//-----------------------------------Обработчик события нажатия кнопки + -> Всплывающее окно добавления места-------------------------------
 popupAddOpenButton.addEventListener('click', () => {
   popupAddForm.reset();
-  toggleButtonState(scheduleInputAdd, buttonAdd, validationConfig.disableButtonClass);
-  removeValidationErrors(popupAddForm);
+  validationAdd.removeValidationErrors();
   openPopup(popupAdd);
 })
 //-----------------------------------Всплывающая форма редактирования профиля---------------------------
-//___________________________________Нажатие кнопки Сохранить + Закрытие окна________________________
+//___________________________________Обработчик события нажатия кнопки Сохранить редактирования профиля -> перезапись полей в гл форме + Закрытие окна__________
 popupEditorForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   mainTitle.textContent = inputNameEditor.value;
@@ -68,43 +75,34 @@ popupEditorForm.addEventListener('submit', (evt) => {
   closePopup(popupEditor);
 })                                 
 //----------------------------------Всплывающая форма добавление места---------------------------
+//________Обработчик события нажатия кнопки Сохранить добавления места -> перезапись полей в гл форме + Закрытие окна__________
 popupAddForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const newPlace = {
       name: popupAddNamePlace.value,
       link: popupAddLinkPlace.value
   };
-  addCard(elementsOutput, newPlace);
+  const newCard = new Card(newPlace, mySelectorTemplate, openPicturePopup);
+  addCard(elementsOutput, newCard.createNewCard());
   closePopup(popupAdd);
   evt.target.reset(); 
 })                                 
 function addCard(container, cardData) {
-  container.prepend(createNewCard(cardData));
+  container.prepend(cardData);
 }
-function initCardLike(likeButton) {
-  likeButton.addEventListener('click', () => likeButton.classList.toggle('elements__button-heart_black'));
+function openPicturePopup(cardData) {
+  fillImageData(cardData, expendImage, expendCaption);
+  openPopup(popupExtendPicture);
 }
-function createNewCard(cardData) {
-  const cardBody = cardTemplate.querySelector('.elements__card').cloneNode(true);
-  const trashElement = cardBody.querySelector('.elements__button-trash');
-  const imageElement = cardBody.querySelector('.elements__image');
-  const nameElement = cardBody.querySelector('.elements__name');
-  const heartElement = cardBody.querySelector('.elements__button-heart');
-  nameElement.textContent = cardData.name;
-  fillImageData(cardData, imageElement);
-  initCardLike(heartElement);
-  trashElement.addEventListener('click', () => cardBody.remove())
-  imageElement.addEventListener('click', () => {
-    fillImageData(cardData, expendImage);
-    expendCaption.textContent = cardData.name;
-    openPopup(popupExtendPicture);
-  })
-  return cardBody;
-}
-initialCards.forEach((initialСard) => addCard(elementsOutput, initialСard))
-function fillImageData(image, data) {
+initialCards.forEach((initialСard) => {
+  const mycard = new Card(initialСard, mySelectorTemplate, openPicturePopup);
+  addCard(elementsOutput, mycard.createNewCard());
+})
+
+function fillImageData(image, data, name) {
     data.alt = image.name;
     data.src = image.link;
+    name.textContent = image.name;
 }
 //--------------------------------Функция проверки нажатия клафиши ESC---------------------------
 function closePopupEsc(evt) {
@@ -116,3 +114,7 @@ popupAll.forEach((element) => {
       if (evt.target === evt.currentTarget) closePopup(evt.currentTarget);
   })
 })
+const validationEditor = new FormValidator(validationConfig, popupEditorForm);
+validationEditor.enableValidation();
+const validationAdd = new FormValidator(validationConfig, popupAddForm);
+validationAdd.enableValidation();
