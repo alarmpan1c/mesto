@@ -10,7 +10,6 @@ const validationConfig = {
   inputErrorClass: 'popup__input_invalid',
   textErrorClass: 'popup__span-error_type'
 };
-
 //-----------------------------------ОБЩИЕ---------------------------------------------------------
 const popupCloseButtons = document.querySelectorAll('.popup__button-close');
 const popupAll = document.querySelectorAll('.popup');
@@ -82,8 +81,8 @@ popupAddForm.addEventListener('submit', (evt) => {
       name: popupAddNamePlace.value,
       link: popupAddLinkPlace.value
   };
-  const newCard = new Card(newPlace, mySelectorTemplate, openPicturePopup);
-  addCard(elementsOutput, newCard.createNewCard());
+  const newCard = createCard(newPlace);
+  addCard(elementsOutput, newCard);
   closePopup(popupAdd);
   evt.target.reset(); 
 })                                 
@@ -95,10 +94,10 @@ function openPicturePopup(cardData) {
   openPopup(popupExtendPicture);
 }
 initialCards.forEach((initialСard) => {
-  const mycard = new Card(initialСard, mySelectorTemplate, openPicturePopup);
-  addCard(elementsOutput, mycard.createNewCard());
+  //const mycard = new Card(initialСard, mySelectorTemplate, openPicturePopup);
+  const newCard = createCard(initialСard);
+  addCard(elementsOutput, newCard);
 })
-
 function fillImageData(image, data, name) {
     data.alt = image.name;
     data.src = image.link;
@@ -118,3 +117,8 @@ const validationEditor = new FormValidator(validationConfig, popupEditorForm);
 validationEditor.enableValidation();
 const validationAdd = new FormValidator(validationConfig, popupAddForm);
 validationAdd.enableValidation();
+function createCard(item) {
+  const myCard = new Card(item, mySelectorTemplate, openPicturePopup);
+  const cardElement = myCard.createNewCard();
+  return cardElement;
+}
