@@ -1,14 +1,14 @@
-import "./pages/index.css";
-const header = new URL('./images/header__logo.svg', import.meta.url);
-const kusto = new URL('./images/kusto.jpg', import.meta.url);
+import "./index.css";
+//const header = new URL('./images/header__logo.svg', import.meta.url);
+//const kusto = new URL('./images/kusto.jpg', import.meta.url);
 
-import initialCards from "./scripts/utils/constants.js";//импортирует массив из файла
-import Card from "./scripts/components/Card.js";
-import FormValidator from "./scripts/components/FormValidator.js";
-import PopupWithImage from "./scripts/components/PopupWithImage.js";
-import Section from "./scripts/components/Section.js";
-import UserInfo from "./scripts/components/UserInfo.js";
-import PopupWithForm from "./scripts/components/PopupWithForm.js";
+import initialCards from "../utils/constants.js";//импортирует массив из файла
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 
 const validationConfig = {
   inputSelector: '.popup__input',
@@ -45,8 +45,7 @@ const cardOfSection = new Section({//createcard
   items: initialCards, 
   renderer: (item) => {
     const myCard = new Card(item, mySelectorTemplate, openPicturePopup.open);
-    const cardElement = myCard.createNewCard();
-    return cardElement;
+    return myCard.createNewCard();
   }
 }, elementsOutputShedule)
 const openPicturePopup = new PopupWithImage(popupSelectorPicture);
@@ -75,7 +74,7 @@ popupAddOpenButton.addEventListener('click', () => {
 })
 validationEditor.enableValidation();
 validationAdd.enableValidation();
-cardOfSection.addCard();
+cardOfSection.addCards();
 openPicturePopup.setEventListner();
 popupEditors.setEventListner();
 popupAdds.setEventListner();
