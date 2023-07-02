@@ -3,24 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/index.css">
+    <script type="module" src="./pages/index.js"></script>
     <title>Mesto</title>
 </head>
 
 <body class="page">
 
     <header class="header">
-        <img class="header__logo" src="<%=require('./images/header__logo.svg')%>" alt="Логотип">
+        <img class="header__logo" src="./images/header__logo.svg" alt="Логотип">
     </header>
 
     <main class="content">
         <section class="profile">
-            <img class="profile__avatar" src="<%=require('./images/kusto.jpg')%>" alt="Аватар профиля">
+            <button type="button" class="profile__avatar-button">
+                <img class="profile__avatar" src="#" alt="Аватар профиля">
+            </button>
             <div class="profile__info">
                 <div class="profile__container">
-                    <h1 class="profile__title">Жак-Ив Кусто</h1>
+                    <h1 class="profile__title"></h1>
                     <button class="profile__button-edit" type="button" aria-label="Редактировать профиль"></button>
                 </div>
-                <p class="profile__about">Исследователь океана</p>
+                <p class="profile__about"></p>
             </div>
             <button class="profile__button-add" type="button" aria-label="Добавить место"></button>
         </section>
@@ -33,6 +37,8 @@
         <p class="footer__copyright">© 2023 Mesto Russia</p>
     </footer>
 
+   
+   
     <!--Попап - редактирование профиля-->
 
     <div class="popup popup-edit">
@@ -85,6 +91,34 @@
         </div>
     </div>
 
+    <!--- Попап - редактирования профиля-->
+
+    <div class="popup popyp-change-avatar">
+        <div class="popup__container">
+            <button class="popup__button-close" type="button" aria-label="Закрыть"></button>
+            <form class="popup__form" name="form-change-avatar" action="#" method="get" novalidate>
+                <h2 class="popup__title">Обновить Аватар</h2>
+                <div class="popup__content">
+                    <input class="popup__input popup__input_type_url" name="avatar" type="url" id="avatar" placeholder="Ссылка на картинку" required>
+                    <span class="popup__span-error popup__span-error_type_avatar"></span>
+                </div>
+                <button class="popup__button-submit" type="submit" aria-label="Создать">Сохранить</button>
+            </form>
+        </div>
+    </div> 
+
+    <!--- Попап - подтверждени удаления карточки-->
+
+    <div class="popup popyp-erase-image">
+        <div class="popup__container">
+            <button class="popup__button-close" type="button" aria-label="Закрыть"></button>
+            <form class="popup__form" name="form-erase-image" action="#" method="get" novalidate>
+                <h2 class="popup__title popup_delete_header">Вы уверены?</h2>
+                <button class="popup__button-submit" type="submit" aria-label="Да">Да</button>
+            </form>
+        </div>
+    </div> 
+
     <!-- Шаблон карточек - темплейт-->
     <template id="template">
         <div class="elements__card">
@@ -92,7 +126,10 @@
             <img class="elements__image" src="#" alt="#">
             <div class="elements__description">
                 <h2 class="elements__name"></h2>
-                <button class="elements__button-heart" type="button" aria-label="Лайк"></button>
+                <div class="elements__container">
+                    <button class="elements__button-heart" type="button" aria-label="Лайк"></button>
+                    <p class="element__count">0</p>
+                </div>
             </div>
         </div>
     </template>
