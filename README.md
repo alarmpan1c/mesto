@@ -11,6 +11,6 @@
 * Методология БЭМ
 * Webpack
 
-* [Ссылкы на макеты в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1) (https://www.figma.com/file/PSdQFRHoxXJFs2FH8IXViF/JavaScript.-Sprint-9?type=design&node-id=109-150&mode=design&t=KnjWXWfMpyX237wF-0)
+* [Ссылкы на макеты в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)(https://www.figma.com/file/PSdQFRHoxXJFs2FH8IXViF/JavaScript.-Sprint-9?type=design&node-id=109-150&mode=design&t=KnjWXWfMpyX237wF-0)
 
 * [Ссылка на проект](https://alarmpan1c.github.io/mesto/)

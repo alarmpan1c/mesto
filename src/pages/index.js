@@ -2,7 +2,7 @@
 //const header = new URL('./images/header__logo.svg', import.meta.url);
 //const kusto = new URL('./images/kusto.jpg', import.meta.url);
 
-import initialCards from "../utils/constants.js";//импортирует массив из файла
+//import initialCards from "../utils/constants.js";//импортирует массив из файла
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithImage from "../components/PopupWithImage.js";
