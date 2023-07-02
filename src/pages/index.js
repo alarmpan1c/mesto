@@ -1,4 +1,4 @@
-//import "./index.css";
+import "./index.css";
 //const header = new URL('./images/header__logo.svg', import.meta.url);
 //const kusto = new URL('./images/kusto.jpg', import.meta.url);
 
