@@ -2,7 +2,27 @@ import "./index.css";
 //const header = new URL('./images/header__logo.svg', import.meta.url);
 //const kusto = new URL('./images/kusto.jpg', import.meta.url);
 
-//import initialCards from "../utils/constants.js";//импортирует массив из файла
+import {
+  validationConfig,
+  info, 
+  popupEditOpenButton,
+  popupAddOpenButton,
+  popupEditor,
+  popupEditorForm,
+  elementsOutputShedule,
+  popupAdd,
+  popupAddForm,
+  popupChangeAvatar,
+  popupChangeAvatarForm,
+  popupAvatarEdit,
+  popupEraseImage,
+  popupEraseImageForm,
+  mySelectorTemplate,
+  popupSelectorEdit,
+  popupSelectorAdd,
+  popupSelectorPicture,
+  popupSelectorAvatar,
+  popupSelectorErase} from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithImage from "../components/PopupWithImage.js";
@@ -12,42 +32,6 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import EraseForm from "../components/EraseForm.js";
 import Api from "../components/Api.js";
 
-const validationConfig = {
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button-submit',
-  errorSelectorTemplate: '.popup__span-error_type_',
-  disableButtonClass: 'popup__button-submit_invalid',
-  inputErrorClass: 'popup__input_invalid',
-  textErrorClass: 'popup__span-error_type'
-};
-
-const info = {
-  selectorName: '.profile__title',
-  selectorJob: '.profile__about',
-  selectorPhoto: '.profile__avatar'
-}
-
-//-----------------------------------ОБЩИЕ---------------------------------------------------------
-const popupEditOpenButton = document.querySelector('.profile__button-edit');
-const popupAddOpenButton = document.querySelector('.profile__button-add');
-const popupEditor = document.querySelector('.popup');
-const popupEditorForm = popupEditor.querySelector('.popup__form');
-const elementsOutputShedule = '.elements';
-//-----------------------------------Всплывающее окно ДОБАВЛЕНИЯ КАРТОЧКИ-----------------------
-const popupAdd = document.querySelector('.popyp-add-place');
-const popupAddForm = popupAdd.querySelector('.popup__form');
-//----------------------------------Селектора--------------------------------------------------
-const popupChangeAvatar = document.querySelector('.popyp-change-avatar');
-const popupChangeAvatarForm = popupChangeAvatar.querySelector('.popup__form');
-const popupAvatarEdit = document.querySelector('.profile__avatar-button');
-const popupEraseImage = document.querySelector('.popyp-erase-image');
-const popupEraseImageForm = popupEraseImage.querySelector('.popup__form');
-const mySelectorTemplate = '#template';
-const popupSelectorEdit = '.popup';
-const popupSelectorAdd = '.popyp-add-place'; 
-const popupSelectorPicture = '.popup-expand';
-const popupSelectorAvatar = '.popyp-change-avatar';
-const popupSelectorErase = '.popyp-erase-image';
 const validationEditor = new FormValidator(validationConfig, popupEditorForm);
 const validationAdd = new FormValidator(validationConfig, popupAddForm);
 const validationAvatar = new FormValidator(validationConfig, popupChangeAvatarForm);
@@ -176,10 +160,11 @@ function addingNewCard (item) {
 //Вывод массива карточек с сервера
 Promise.all([api.getInfo(), api.getPicture()])
 .then(([infoUser, infoPicture]) => {
-  //console.log(infoPicture) rfr dct yfljtkj///////
+  console.log(infoUser)
   infoPicture.forEach(element => element.writedId = infoUser._id);
 userInfo.setUserInfo({name: infoUser.name, photo: infoUser.avatar, job: infoUser.about});
 cardOfSection.addCard(infoPicture);
-})
-.catch((error => console.log('Ошибка при загрузке карточек с сервера')))
+console.log("hello")
+}) 
+.catch((error => console.log('Ошибка при загрузке карточек с сервера', error)))
 //console.log(infoPicture)

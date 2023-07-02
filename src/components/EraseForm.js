@@ -5,10 +5,11 @@ export default class EraseForm extends Popup {
         super(selectorPopup);
         this._submitForm = submitForm;
         this._form = this._popup.querySelector('.popup__form');
-        this._previousText = this._popup.querySelector('.popup__button-submit').textContent;
+        this._submitButton = this._popup.querySelector('.popup__button-submit');
+        this._previousText = this._submitButton.textContent
     }
     returnText(){
-        this._popup.querySelector('.popup__button-submit').textContent = this._previousText;  
+        this._submitButton.textContent = this._previousText;  
     }
         
         open = (element) => { 
@@ -21,7 +22,7 @@ export default class EraseForm extends Popup {
             super.setEventListner();
             this._form.addEventListener('submit', (evt) => {
                 evt.preventDefault();
-                this._popup.querySelector('.popup__button-submit').textContent = `${this._popup.querySelector('.popup__button-submit').textContent}...`;
+                this._submitButton.textContent = `${this._previousText}...`;
                 this._submitForm({card: this._element, idEraseCard: this._idEraseCard });
             });
         }

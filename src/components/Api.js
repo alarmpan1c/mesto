@@ -11,12 +11,17 @@ export default class Api {
          headers: {
              authorization:  this._token
          }
-      })
-       .then(res => {
-           if(res.ok) return res.json();
-           else return Promise.reject;
-       })
-  }
+      }).then((res) => {
+        return  this._checkResponse(res)
+        })}
+
+      _checkResponse(res){
+        if(res.ok) {
+          return res.json();
+        } else {
+        return Promise.reject(`${res.status}`);
+        }
+      }
 
    getPicture(){
        return fetch(`${this._url}/cards`, {
@@ -24,10 +29,9 @@ export default class Api {
               authorization:  this._token
           }
        })
-      .then(res => {
-      if(res.ok) return res.json();
-      else return Promise.reject;
-   })
+      .then((res) => {
+      return  this._checkResponse(res)
+      })
   }
   addHeartonServer(infoforServer){
       return fetch(`${this._url}/cards/${infoforServer}/likes`, {
@@ -37,10 +41,9 @@ export default class Api {
                'Content-Type': 'application/json'
              },
         })
-         .then(res => {
-           if(res.ok) return res.json();
-           else return Promise.reject;
-       })
+        .then((res) => {
+          return  this._checkResponse(res)
+          })
   }
   eraseHeartonServer(infoforServer){
       return fetch(`${this._url}/cards/${infoforServer}/likes`, {
@@ -50,10 +53,9 @@ export default class Api {
                'Content-Type': 'application/json'
              },
         })
-         .then(res => {
-           if(res.ok) return res.json();
-           else return Promise.reject;
-       })
+        .then((res) => {
+          return  this._checkResponse(res)
+          })
   }
   setInfoonServer(infoforServer){
       return fetch(`${this._url}/users/me`, {
@@ -67,10 +69,9 @@ export default class Api {
             about: infoforServer.job
           })
         })
-         .then(res => {
-           if(res.ok) return res.json();
-           else return Promise.reject;
-       })
+        .then((res) => {
+          return  this._checkResponse(res)
+          })
   }
   setAvataronServer(infoforServer){
       return fetch(`${this._url}/users/me/avatar`, {
@@ -83,10 +84,9 @@ export default class Api {
             avatar: infoforServer.avatar,
           })
         })
-         .then(res => {
-           if(res.ok) return res.json();
-           else return Promise.reject;
-       })
+        .then((res) => {
+          return  this._checkResponse(res)
+          })
   }
   eraseCardonServer(infoforServer){
       return fetch(`${this._url}/cards/${infoforServer}`, {
@@ -96,10 +96,9 @@ export default class Api {
                'Content-Type': 'application/json'
              },
         })
-         .then(res => {
-           if(res.ok) return res.json();
-           else return Promise.reject;
-       })
+        .then((res) => {
+          return  this._checkResponse(res)
+          })
   }
   addCardonServer(infoforServer){
       return fetch(`${this._url}/cards`, {
@@ -113,10 +112,9 @@ export default class Api {
             link: infoforServer.link
           })
         })
-         .then(res => {
-           if(res.ok) return res.json();
-           else return Promise.reject;
-       })
+        .then((res) => {
+          return  this._checkResponse(res)
+          })
   }
   
 
